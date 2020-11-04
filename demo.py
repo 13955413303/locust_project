@@ -41,7 +41,7 @@ class Gitbehavior(TaskSet):
                 resp.success()
             else:
                 resp.failure(
-                    '/login/ got wrong resp! code:' + str(resp.status_code) + ' ' + time.strftime("%Y-%m-%d %H:%M:%S",
+                     '/login/ got wrong resp! code:' + str(resp.status_code) + ' ' + time.strftime("%Y-%m-%d %H:%M:%S",
                                                                                                   time.localtime()))
 
 
@@ -69,10 +69,8 @@ class Webbehavior(TaskSet):
     def web_test(self):
         name = ''.join(random.sample('zyxwvutsrqponmlkjihgfedcba', 3))
         age = random.randint(1, 150)
-        print(name, age)
         with self.client.post(":5000/test_1.0", catch_response=True, params={'name': name, 'age': age})as resp:
             print(resp.text)
-            print(resp.status_code)
             if resp.status_code == 200:
                 resp.success()
             else:
