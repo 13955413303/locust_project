@@ -62,14 +62,14 @@ class Webbehavior(TaskSet):
             if resp.status_code == 200:
                 resp.success()
             else:
-                resp.failure('/111.html got wrong resp! code:' + str(resp.status_code) + ' ' + time.strftime(
+                resp.failure('/111.templates got wrong resp! code:' + str(resp.status_code) + ' ' + time.strftime(
                     "%Y-%m-%d %H:%M:%S", time.localtime()))
 
     @task(3)
     def web_test(self):
         name = ''.join(random.sample('zyxwvutsrqponmlkjihgfedcba', 3))
         age = random.randint(1, 150)
-        with self.client.post(":5000/test_1.0", catch_response=True, params={'name': name, 'age': age})as resp:
+        with self.client.get(":5000/test_1.0", catch_response=True, params={'name': name, 'age': age})as resp:
             print(resp.text)
             if resp.status_code == 200:
                 resp.success()
